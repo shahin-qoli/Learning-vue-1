@@ -5,7 +5,9 @@ const state = {
 
 const mutations = {
     'SET_STOCKS' (state, stocks){
-        this.stocks = stocks
+        state.stocks = stocks
+        console.log(stocks)
+        console.log('state inited')
     },
     'RND_STOCKS' (state){
     
@@ -14,7 +16,7 @@ const mutations = {
 
 const actions = {
     buyStock: ({commit}, order) => {
-
+        commit('BUY_STOCK', order)
     },
     initStocks: ({commit}) => {
         commit('SET_STOCKS', stocks)
