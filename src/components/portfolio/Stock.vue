@@ -1,6 +1,6 @@
 <template>
     <div class="col-sm-6 col-md-4">
-        <div class="panel panel-success">
+        <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">
                     {{stock.name}}
@@ -12,7 +12,7 @@
                     <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
                 </div>
                 <div class="pull-right">
-                    <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0" >Sell</button>
+                    <button class="btn btn-success" @click="sellStock" :disabled="quantity <= 0 || inSuffQuan" >{{inSuffQuan ? 'insufff' : 'sell'}}</button>
                 </div>
                
             </div>
@@ -29,6 +29,11 @@
                 quantity: 0
             }
         },
+        computed:{
+            inSuffQuan(){
+                return this.quantity > this.stock.quantity
+            }
+        },
         methods: {
             // ...mapActions([
             //         'sellStock'
@@ -42,6 +47,7 @@
                 }
                 // this.sellStock(order)
                 this.$store.dispatch('sellStock', order)
+                this.quantity = 0;
 
             }
         }

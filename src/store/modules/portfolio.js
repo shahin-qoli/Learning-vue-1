@@ -17,15 +17,15 @@ const mutations = {
         
     },
     'SELL_STOCK' (state, {stockId, quantity, stockPrice }){
-        const record = this.stocks.find(element => element.id == stockId)
+        const record = state.stocks.find(element => element.id == stockId)
         if(record.quantity > quantity){
             record.quantity -= quantity
         }
         else{
-            this.stocks.splice(this.stocks.indexOf(record),1)
+            state.stocks.splice(state.stocks.indexOf(record),1)
 
         }
-        this.funds += quantity * stockPrice
+        state.funds += quantity * stockPrice
     }
 
 }
@@ -52,7 +52,7 @@ const getters ={
             };
         });
     },
-    fund(state) {
+    funds(state) {
         return state.funds;
     }
 };
